@@ -11,9 +11,7 @@ pipeline {
     }
 }
 stage('DeployToStaging') {
-    if {
-        branch 'master'
-    }
+    if (env.BRANCH_NAME ==~ /(master)/)
     steps {
         withCredentials([usernamePassword(credentialsId: 'webserver_login', usernameVariable: 'USERNAME', passwordVariable: 'USERPASS')]) {
             sshPublisher(
